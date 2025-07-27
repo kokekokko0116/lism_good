@@ -23,7 +23,6 @@ function startGame() {
     requestAnimationFrame(gameLoop);
 }
 
-
 function spawnHeartRandom() {
     const now = performance.now();
     const y = 60 + Math.random() * 80;
@@ -36,19 +35,17 @@ function spawnHeartRandom() {
         autoMissed: false
     });
 
-    // 次のノート生成間隔を 0.5秒〜1.5秒のランダムに
     const nextInterval = 100 + Math.random() * 1000;
-
     setTimeout(spawnHeartRandom, nextInterval);
 }
 
 function gameLoop(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 枠線だけのヒットゾーンハート
+    // ヒットゾーン表示
     drawHeart(hitZoneX, 100, 20, null, "#ccc");
 
-    // ノート描画・移動・自動MISS判定
+    // ノート描画・移動・MISS判定
     notes.forEach(note => {
         const dt = (timestamp - note.time) / 1000;
         note.x = canvas.width - dt * noteSpeed;
@@ -57,14 +54,13 @@ function gameLoop(timestamp) {
             drawHeart(note.x, 100, 20);
         }
 
-        // 自動MISS判定（30px以上通過したら）
         if (!note.hit && !note.autoMissed && note.x < hitZoneX - 30) {
             note.autoMissed = true;
             showJudgement("MISS", "#aaa");
         }
     });
 
-    // エフェクト表示（PERFECT / GOOD）
+    // エフェクト表示
     effects = effects.filter(effect => effect.age < 0.3);
     effects.forEach(effect => {
         effect.age += 1 / 60;
@@ -119,14 +115,19 @@ function showJudgement(text, color = "#333") {
     }, 300);
 }
 
+// クリックイベント：クリックゾーンを拡大（半径50px）
 canvas.addEventListener("click", (e) => {
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
+    const rectWidth = window.innerHeight; // 画面の高さ（px）＝横幅に使う
+    const rectHeight = 200; // 縦200px
+
     const dx = x - hitZoneX;
     const dy = y - 100;
-    if (Math.sqrt(dx * dx + dy * dy) > 30) return;
+
+    if (Math.abs(dx) > rectWidth / 2 || Math.abs(dy) > rectHeight / 2) return;
 
     const now = performance.now();
     const hitNote = notes.find(note =>
