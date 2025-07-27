@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>いいねリズムゲーム付き記事サイト</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <div class="logo">
+                <p>Like</p>
+            </div>
+            <div class="menu">
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search" placeholder="検索..." />
+                </div>
+                <span class="material-icons">notifications</span>
+                <span class="material-icons">account_circle</span>
+                <button class="button">
+                    記事を投稿する
+                </button>
+            </div>
+
+
+        </div>
+        <div class="content">
+
+            <article class="article">
+                <div class="article-header">
+                    <img src="https://msp.c.yimg.jp/images/v2/FUTi93tXq405grZVGgDqGyAb5ONuRcLz05j3F3RMx4wPpDdtxGwTQrJAZRn9mzjCyquPN-n-RRxad08W-Lp3NbuQXy2Mu9ZfWhC9rDAb9HcluYKohAV0V-4n1CLXDu5rPmJxiIETypLcvBxC9rle7f_d1CAm9Tel9uwitNk8nbCFz5ElSzeyQoRIY27f366-/82_shiba.jpg?errorImage=false"
+                        alt="投稿者アイコン" class="author-icon">
+                    <div class="author-info">
+                        <span class="author-name">開発チーム</span>
+                        <span class="post-date">2025年7月26日</span>
+                    </div>
+                </div>
+
+                <h1 class="article-title">「いいね」を無限にさせ続ける仕組みを作りました！</h1>
+
+                <div class="article-tags">
+                    <span class="tag">#開発</span>
+                    <span class="tag">#新機能</span>
+                    <span class="tag">#フェイクニュース</span>
+                </div>
+
+                <div class="article-body">
+                    <p>
+                        「ハートをタイミングよくタップすることで『いいね』を無限に押したくなる仕組み」を実装しました！🎮
+                    </p>
+
+                    <h2>ゲームシステム</h2>
+                    <p>
+                        この機能は、ハートマークがリズムよく画面に流れてくるシンプルなゲーム体験です。
+                        タイミングよくクリックできれば「PERFECT」や「GOOD」などの評価が表示され、
+                        ただの「いいね」ではない、直感的で楽しい体験が味わえます。
+                    </p>
+
+                    <h2>遊び方</h2>
+                    <ul>
+                        <li>フッターに表示されるハートマークを、リズムに合わせてクリック！</li>
+                        <li>タイミングが合えば「いいね」がカウントされます</li>
+                        <li>スコア表示などもあり、ちょっとしたゲーム気分で楽しめます</li>
+                        <li>時間を忘れて、この記事にずっと「いいね」し続けてしまうかも…？</li>
+                    </ul>
+
+                    <h2>今後の展望</h2>
+                    <p>
+                        「いいね」だけでなく、今後は「ブックマーク」や「お気に入り」などの機能も追加予定です。
+                        リズムに合わせて感情を表現できる、そんな新しいインタラクションを目指しています。
+                    </p>
+                </div>
+
+            </article>
+        </div>
+
+
+        <div id="gameBox">
+            <div style="display: flex; position: relative;">
+                <canvas id="gameCanvas" width="800" height="200"></canvas>
+                <div id="judgement"></div>
+                <p id="score">いいね: 0</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
